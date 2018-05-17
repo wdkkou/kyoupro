@@ -2,26 +2,43 @@ import java.util.Scanner;
 public class Main045{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        String S = sc.next();
-        int n = S.length()-1;
-        long ans = 0;
-        for(int i = 0;i < (1 << n);i++){
-            String x = ""+S.charAt(0);
-            long sum = 0;
-            for(int j = 0;j < n;j++){
-                if((i & (1<<j)) >= 1){
-                    x += "+" + S.charAt(j+1);
+        String a = sc.next();
+        String b = sc.next();
+        String c = sc.next();
+        char[] ac = a.toCharArray();
+        char[] bc = b.toCharArray();
+        char[] cc = c.toCharArray();
+        int ai = 0;
+        int bi = 0;
+        int ci = 0;
+        char winner = 'a';
+        char x = ac[ai];
+        while(true){
+            if(x == 'a'){
+                if(ai >= a.length()){
+                    winner = 'A';
+                    break;
                 }
-                else{
-                    x += S.charAt(j+1);
+                x = ac[ai];
+                ai++;
+            }
+            if(x == 'b'){
+                if(bi >= b.length()){
+                    winner = 'B';
+                    break;
                 }
+                x = bc[bi];
+                bi++;
             }
-            String[] split = x.split("\\+");
-            for(int j = 0;j < split.length;j++){
-                sum += Long.valueOf(split[j]);
+            if(x == 'c'){
+                if(ci >= c.length()){
+                    winner = 'C';
+                    break;
+                }
+                x = cc[ci];
+                ci++;
             }
-            ans += sum;
         }
-        System.out.println(ans);
+        System.out.println(winner);
     }
 }
