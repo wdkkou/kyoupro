@@ -4,6 +4,7 @@ public class Main{
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
+<<<<<<< HEAD
         int[][] g = new int[n][n];
         for(int i = 0;i < m;i++){
             int k = sc.nextInt();
@@ -19,6 +20,13 @@ public class Main{
         }
         for(int j = 0;j < m;j++){
             cnt += dfs(i,n,cnt);
+=======
+        int[] a = new int[m];
+        int[] b = new int[m];
+        for(int i = 0;i < m;i++){
+            a[i] = sc.nextInt();
+            b[i] = sc.nextInt();
+>>>>>>> 28ad9476edfff96bd4d2f55fe1835283a0bbc75a
         }
     }
 }
