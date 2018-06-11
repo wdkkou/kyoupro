@@ -18,21 +18,22 @@ public class Main{
             six.add(six.get(i-1)*6);
         }
         List<Integer> list = new ArrayList<>();
+        list.add(1);
         list.addAll(nine);
         list.addAll(six);
         Collections.sort(list);
-        //System.out.println(list);
         int[] dp = new int[n+1];
+        for(int i = 1;i <= n;i++){
+            dp[i] = 1000000000;
+        }
         for(int i = 1;i <= n;i++){
             for(Integer v : list){
                 if(v > i){
                     continue;
                 }
-                System.out.println(v);
                 dp[i] = Math.min(dp[i],dp[i-v]+1);
             }
         }
-        System.out.println(Arrays.toString(dp));
         System.out.println(dp[n]);
 
     }
