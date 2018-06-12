@@ -7,20 +7,18 @@ public class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        List<Integer> nine = new ArrayList<>();
-        List<Integer> six = new ArrayList<>();
-        nine.add(9);
-        for(int i = 1;i <= 6;i++){
-            nine.add(nine.get(i-1)*9);
-        }
-        six.add(6);
-        for(int i = 1;i <= 6;i++){
-            six.add(six.get(i-1)*6);
-        }
         List<Integer> list = new ArrayList<>();
         list.add(1);
-        list.addAll(nine);
-        list.addAll(six);
+        int nine = 9;
+        for(int i = 0;i < 6;i++){
+            list.add(nine);
+            nine *= 9;
+        }
+        int six = 6;
+        for(int i = 0;i < 6;i++){
+            list.add(six);
+            six *= 6;
+        }
         Collections.sort(list);
         int[] dp = new int[n+1];
         for(int i = 1;i <= n;i++){
