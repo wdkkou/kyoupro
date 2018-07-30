@@ -1,53 +1,55 @@
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 public class Main{
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        List<Integer> a = new ArrayList<>();
-        List<Integer> b = new ArrayList<>();
-        List<Integer> c = new ArrayList<>();
-        List<Integer> d = new ArrayList<>();
 
+        List<Point> red = new ArrayList<>();
         for(int i = 0;i < n;i++){
-            a.add(sc.nextInt());
-            b.add(sc.nextInt());
+            Point x = new Point(sc.nextInt(),sc.nextInt());
+            red.add(x);
         }
+        List<Point> blue = new ArrayList<>();
         for(int i = 0;i < n;i++){
-            c.add(sc.nextInt());
-            d.add(sc.nextInt());
+            Point x = new Point(sc.nextInt(),sc.nextInt());
+            blue.add(x);
         }
+        Collections.sort(red,new PointComparator());
+        Collections.sort(blue,new PointComparator());
 
-        Set<Integer> setx = new HashSet<>();
-        Set<Integer> sety = new HashSet<>();
-        int cnt = 0;
-        for(int i = 0;i < n;i++){
-            int ax = a.get(i);
-            for(int j = 0;j < n;j++){
-                int cx = c.get(j);
-                if(ax < cx){
-                    int by = b.get(i);
-                    int dy = d.get(j);
-
-                    //System.out.println(Arrays.toString(setx.toArray()));
-                    //System.out.println(Arrays.toString(sety.toArray()));
-                    if(setx.contains(cx) && sety.contains(dy)){
-                        continue;
-                    }
-                    if(by < dy){
-                        cnt++;
-                        System.out.printf("a %d b %d c %d d %d%n",ax,by,cx,dy);
-                        setx.add(cx);
-                        sety.add(dy);
-                        break;
+        long ans = 0;
+        for(Point p : blue){
+            Point max = null;
+            for(Point q : red){
+                if(q.x < p.x && q.y < p.y){
+                    if(max == null || max.y < q.y){
+                        max = q;
                     }
                 }
             }
+            if(max != null){
+                ans++;
+                red.remove(max);
+            }
         }
-        System.out.println(cnt);
+        System.out.println(ans);
+    }
+
+    static class Point{
+        int x;
+        int y;
+        public Point(int x,int y){
+            this.x = x;
+            this.y = y;
+        }
+    }
+    static class PointComparator implements Comparator<Point>{
+        public int compare(Point p1,Point p2){
+            return p1.x - p2.x;
+        }
     }
 }
