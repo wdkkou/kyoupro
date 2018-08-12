@@ -1,37 +1,20 @@
 import java.util.Scanner;
-public class Main{
-    public static void main(String[] args){
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+public class Main {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        if(s.charAt(0) != 'A'){
-            System.out.println("WA");
-            return;
+        int n = sc.nextInt();
+        StringBuilder sb = new StringBuilder();
+        while (n != 0) {
+            sb.append(n % 2 == 0 ? 0 : 1);
+            n -= Math.abs(n % 2);
+            n /= -2;
         }
-        int cnt = 0;
-        boolean can = false;
-        for(int i = 1;i < s.length();i++){
-            if(s.charAt(i) == 'C' && (i == s.length()-1 || i == 1)){
-                can = false;
-                break;
-            }
-            if(s.charAt(i) == 'C'){
-                can = true;
-                cnt++;
-                if(cnt >= 2){
-                    can = false;
-                    break;
-                }
-                continue;
-            }
-            if(s.charAt(i) >= 'A' && s.charAt(i) <= 'Z'){
-                can = false;
-                break;
-            }
+        if (sb.length() == 0) {
+            sb.append(0);
         }
-        if(can){
-            System.out.println("AC");
-            return;
-        }
-            System.out.println("WA");
+        System.out.println(sb.reverse().toString());
     }
 }
