@@ -9,6 +9,6 @@ public class Main {
     }
     public static long solve(long x, long y) {
         
-        return l
+        return l;
     }
 }
