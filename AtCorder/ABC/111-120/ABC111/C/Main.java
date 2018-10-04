@@ -23,34 +23,34 @@ public class Main {
             }
             kisu.put(x, 1);
         }
-        List<Entry<Integer,Integer>> list_entries = createList(guu);
-        List<Entry<Integer,Integer>> list_entries2 = createList(kisu);
+        List<Entry<Integer, Integer>> list_guu = createList(guu);
+        List<Entry<Integer, Integer>> list_kisu = createList(kisu);
         int max = 0;
         int cnt = 0;
         int cnt2 = 0;
-        if (list_entries.get(0).getKey() == list_entries2.get(0).getKey()) {
-            max = list_entries.get(0).getValue();
+        if (list_guu.get(0).getKey() == list_kisu.get(0).getKey()) {
+            max = list_guu.get(0).getValue();
             cnt += n / 2 - max;
-            if (list_entries2.size() == 1) {
+            if (list_kisu.size() == 1) {
                 cnt += n / 2;
             } else {
-                cnt += n / 2 - list_entries2.get(1).getValue();
+                cnt += n / 2 - list_kisu.get(1).getValue();
             }
-            max = list_entries2.get(0).getValue();
+            max = list_kisu.get(0).getValue();
             cnt2 += n / 2 - max;
-            if (list_entries.size() == 1) {
+            if (list_guu.size() == 1) {
                 cnt2 += n / 2;
             } else {
-                cnt2 += n / 2 - list_entries.get(1).getValue();
+                cnt2 += n / 2 - list_guu.get(1).getValue();
             }
             System.out.println(Math.min(cnt, cnt2));
             return;
         }
-        cnt += n / 2 - list_entries.get(0).getValue();
-        cnt += n / 2 - list_entries2.get(0).getValue();
+        cnt += n / 2 - list_guu.get(0).getValue();
+        cnt += n / 2 - list_kisu.get(0).getValue();
         System.out.println(cnt);
     }
-    public static List<Entry<Integer, Integer>> createList(Map<Integer,Integer> map) {
+    public static List<Entry<Integer, Integer>> createList(Map<Integer, Integer> map) {
         List<Entry<Integer, Integer>> list_entries =
             new ArrayList<Entry<Integer, Integer>>(map.entrySet());
         Collections.sort(list_entries, new Comparator<Entry<Integer, Integer>>() {
