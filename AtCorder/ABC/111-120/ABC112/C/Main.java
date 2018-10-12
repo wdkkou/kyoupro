@@ -12,40 +12,36 @@ public class Main {
             y.add(sc.nextInt());
             h.add(sc.nextInt());
         }
-        List<ArrayList<ArrayList<Long>>> ans = new ArrayList<ArrayList<ArrayList<Long>>>();
-        long hight = 0;
-        for (int m = 0; m < n; m++) {
-            ArrayList<ArrayList<Long>> a = new ArrayList<ArrayList<Long>>();
-            for (int i = 0; i <= 100; i++) {
-                ArrayList<Long> xList = new ArrayList<>();
-                for (int j = 0; j <= 100; j++) {
-                    hight = h.get(m) + Math.abs(x.get(m) - i) + Math.abs(y.get(m) - j);
-                    xList.add(hight);
-                    System.out.println(hight);
-                }
-                a.add(xList);
-            }
-            ans.add(a);
-        }
-        long answer = 0;
-        for (int i = 0; i <= 100; i++) {
-            boolean exit = false;
-            for (int j = 0; j <= 100; j++) {
+        for (int X = 0; X <= 100; X++) {
+            for (int Y = 0; Y <= 100; Y++) {
                 boolean ok = true;
-                int index = 0;
-                for (int m = 0; m < n - 1; m++) {
-                    if (ans.get(m).get(i).get(j) != ans.get(m + 1).get(i).get(j)) {
-                        ok = false;
+                int H = 0;
+                int cnt = 0;
+                for (int i = 0; i < n; i++) {
+                    if (h.get(i) < 1) {
                         continue;
                     }
+                    H = h.get(i) + Math.abs(x.get(i) - X) + Math.abs(y.get(i) - Y);
+                    cnt++;
                 }
-                if (true) {
-                    answer = ans.get(0).get(i).get(j);
-                    System.out.printf("%d, %d\n", i, j);
-                    break;
+                for (int i = 0; i < n; i++) {
+                    if (h.get(i) < 1) {
+                        continue;
+                    }
+                    if (H != h.get(i) + Math.abs(x.get(i) - X) + Math.abs(y.get(i) - Y)) {
+                        ok = false;
+                        break;
+                    }
+                    if (cnt == 1 && H != 1) {
+                        ok = false;
+                        break;
+                    }
+                }
+                if (ok) {
+                    System.out.printf("%d %d %d\n", X, Y, H);
+                    return;
                 }
             }
         }
-        System.out.println(answer);
     }
 }

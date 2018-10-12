@@ -28,11 +28,13 @@ public class Main {
             }
         }
 
-        List<Entry<Integer, Long>> list_guu = createList(guu);
-        List<Entry<Integer, Long>> list_kisu = createList(kisu);
+        //        List<Entry<Integer, Long>> list_guu = createList(guu);
+        //        List<Entry<Integer, Long>> list_kisu = createList(kisu);
 
+        List<Entry<Integer, Long>> list_guu = new ArrayList<>(map.entrySet());
+        List<Entry<Integer, Long>> list_kisu = new ArrayList<>(map.entrySet());
         long cnt = 0;
-        if (list_guu.get(0).getKey().equals(list_kisu.get(0).getKey())) {
+        if (list_guu.get(0).getKey() == list_kisu.get(0).getKey()) {
             long ans1 = list_guu.get(0).getValue() + list_kisu.get(1).getValue();
             long ans2 = list_guu.get(1).getValue() + list_kisu.get(0).getValue();
             cnt = n - Math.max(ans1, ans2);
