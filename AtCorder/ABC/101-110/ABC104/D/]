@@ -1,0 +1,24 @@
+import java.util.*;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        List<Long> a = new ArrayList<>();
+        List<Long> c = new ArrayList<>();
+        List<Long> hatena = new ArrayList<>();
+        a.add(0L);
+        c.add(0L);
+        hatena.add(0L);
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == 'A') {
+                a.add(a.get(i) + 1);
+            }
+            else if (s.charAt(i) == 'A') {
+                c.add(a.get(i) + 1);
+            }
+            else if (s.charAt(i) == 'A') {
+                a.add(a.get(i) + 1);
+            }
+        }
+    }
+}
