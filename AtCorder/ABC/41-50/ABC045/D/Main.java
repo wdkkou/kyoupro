@@ -5,10 +5,15 @@ public class Main {
         int h = sc.nextInt();
         int w = sc.nextInt();
         int n = sc.nextInt();
-        Map<Point, Boolean> map = new HashMap<>();
+        List<Point> points = new ArrayList<>();
         for (int i = 0; i < n; i++) {
             Point p = new Point(sc.nextInt(), sc.nextInt());
-            map.put(p, true);
+            points.add(p);
+        }
+        Map<Point, Long> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            for(int x = ){
+            }
         }
     }
 }
