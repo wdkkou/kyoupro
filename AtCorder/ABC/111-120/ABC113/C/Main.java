@@ -20,13 +20,12 @@ public class Main {
             map.get(index).add(year);
         }
 
-        Collections.sort(yearList);
-
         for (int i = 1; i <= n; i++) {
+            if (!map.containsKey(i)) {
+                continue;
+            }
+            Collections.sort(map.get(i));
         }
-
-        for (int i = 0; i < m; i++) {
-            System.out.printf("%06d%06d%n", indexList.get(i), y);
-        }
+        System.out.println(map);
     }
 }
