@@ -1,5 +1,6 @@
+import java.util.*;
 public class UnionFind {
-    int[] par;
+    static int[] par;
     public UnionFind(int n) {
         this.par = new int[n];
         for (int i = 0; i < n; i++) {
@@ -17,10 +18,19 @@ public class UnionFind {
         int rx = root(x);
         int ry = root(y);
         if (rx == ry) {
-            par[rx] = ry;
+            return;
         }
+        par[rx] = ry;
     }
     public boolean same(int x, int y) {
         return root(x) == root(y);
+    }
+    public static void main(String[] args) {
+        int n = 3;
+        UnionFind u = new UnionFind(3);
+        u.unite(1, 2);
+        for (int i = 0; i < n; i++) {
+            System.out.println(u.root(i));
+        }
     }
 }
