@@ -3,16 +3,17 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        int min = 1000;
-        for (int i = 0; i < s.length() - 2; i++) {
-            min = Math.min(calc(s.charAt(i), s.charAt(i + 1), s.charAt(i + 2)), min);
+        int n = sc.nextInt();
+        List<Integer> p = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            p.add(sc.nextInt());
         }
-        System.out.println(min);
-    }
-    public static int calc(char x, char y, char z) {
-        int a = 100 * Character.getNumericValue(x) + 10 * Character.getNumericValue(y)
-            + Character.getNumericValue(z);
-        return Math.abs(753 - a);
+        Collections.sort(p);
+        int ans = p.get(n - 1) / 2;
+
+        for (int i = 0; i < n - 1; i++) {
+            ans += p.get(i);
+        }
+        System.out.println(ans);
     }
 }
