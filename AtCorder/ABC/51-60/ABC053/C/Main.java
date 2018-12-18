@@ -1,21 +1,15 @@
 import java.util.Scanner;
-public class Main{
-    public static void main(String[] args){
+public class Main {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         long x = sc.nextLong();
-        long cnt = 0;
-        if(x % 11 != 0){
-            long mod = x % 11;
-            if(mod <= 6){
-            cnt = 2 * (x / 11) + 1;
-            }
-            else{
-            cnt = 2 * (x / 11) + 2;
-            }
+        long ans = 2 * (x / 11);
+        long amari = x % 11;
+        if (amari > 0 && amari <= 6) {
+            ans++;
+        } else if (amari > 6) {
+            ans += 2;
         }
-        else{
-            cnt = 2 * (x / 11);
-        }
-        System.out.println(cnt);
+        System.out.println(ans);
     }
 }
