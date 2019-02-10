@@ -4,16 +4,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         long x = sc.nextLong();
         long k = sc.nextLong();
-        long ans = x;
-        if (k == 0) {
-            ans++;
-            System.out.println(ans);
-            return;
+        long t = 1;
+        for (int i = 0; i < k; i++) {
+            t *= 10;
         }
-        long l = (long) Math.pow(10, k);
-        ans /= l;
-        ans++;
-        ans *= l;
+        long ans = (x + t) / t * t;
         System.out.println(ans);
     }
 }
