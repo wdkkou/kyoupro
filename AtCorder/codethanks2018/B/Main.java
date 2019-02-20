@@ -6,11 +6,19 @@ public class Main {
         int y = sc.nextInt();
 
         int total = x + y;
-        int sub = x + y;
-        if (total % 4 == 0 && (sub % 2 == 0 || sub == 0)) {
-            System.out.println("Yes");
+        int k = total / 4;
+        if (total % 4 != 0) {
+            System.out.println("No");
             return;
         }
-        System.out.println("No");
+        if (!((x - k) % 2 == 0 && x - k >= 0)) {
+            System.out.println("No");
+            return;
+        }
+        if (!((y - k) % 2 == 0 && y - k >= 0)) {
+            System.out.println("No");
+            return;
+        }
+        System.out.println("Yes");
     }
 }
