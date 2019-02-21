@@ -8,20 +8,42 @@ public class Main {
             a[i] = sc.nextLong();
         }
         Arrays.sort(a);
-        int m = n / 2;
-        if (n % 2 == 0) {
-            m = n / 2 - 1;
-        }
 
-        long ans = 0;
-        for (int i = 0; i < m; i++) {
-            long min = a[i];
-            if (i % 2 == 1) {
-            }
-            ans += Math.abs(max - a[i]) + Math.abs(max - a[i + 1]);
-            System.out.println("max = " + max);
-            System.out.printf(" %d %d %n", a[i], a[i + 1]);
-        }
+        long res1 = 0;
+        long[] k = new long[n];
+        res1 = solve(k, a, n, true);
+        long res2 = 0;
+        res2 = solve(k, a, n, false);
+
+        long ans = Math.max(res1, res2);
         System.out.println(ans);
+    }
+    public static long solve(long[] k, long[] a, int n, boolean even) {
+        for (int i = 0; i < n; i++) {
+            if (i == 0 || i == n - 1) {
+                k[i] = 1;
+            } else {
+                k[i] = 2;
+            }
+            if (even) {
+                if (i % 2 == 0) {
+                    k[i] *= -1;
+                } else if (i % 2 != 0) {
+                    k[i] *= 1;
+                }
+            } else {
+                if (i % 2 == 0) {
+                    k[i] *= 1;
+                } else if (i % 2 != 0) {
+                    k[i] *= -1;
+                }
+            }
+        }
+        Arrays.sort(k);
+        long res = 0;
+        for (int i = 0; i < n; i++) {
+            res += k[i] * a[i];
+        }
+        return res;
     }
 }
