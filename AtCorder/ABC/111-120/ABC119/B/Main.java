@@ -4,24 +4,20 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int m = sc.nextInt();
-        Map<Integer, Integer> a = new HashMap<>();
+        List<Float> x = new ArrayList<>();
+        List<String> u = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            int k = sc.nextInt();
-            for (int j = 0; j < k; j++) {
-                int x = sc.nextInt();
-                if (!a.containsKey(x)) {
-                    a.put(x, 0);
-                }
-                a.put(x, a.get(x) + 1);
+            x.add(sc.nextFloat());
+            u.add(sc.next());
+        }
+        float ans = 0;
+        for (int i = 0; i < n; i++) {
+            if (u.get(i).equals("JPY")) {
+                ans += x.get(i);
+            } else if (u.get(i).equals("BTC")) {
+                ans += (float) 380000.0 * x.get(i).floatValue();
             }
         }
-        int ans = 0;
-        for (Integer key : a.keySet()) {
-            if (a.get(key) == n) {
-                ans++;
-            }
-        }
-        System.out.println(ans);
+        System.out.printf("%.5f%n", ans);
     }
 }
