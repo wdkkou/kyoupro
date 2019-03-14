@@ -4,22 +4,23 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         long a = sc.nextLong();
         long b = sc.nextLong();
-        long div = 2;
-        long ans = 0;
-        while (div <= 64) {
-            long cnt1 = (a + 1) / div;
-            long cnt2 = (b + 1) / div;
-            long res = cnt2 - cnt1;
-            System.out.println("res " + res);
-            if (res == 0) {
-                ans += 0;
-            } else if (res % 2 != 0) {
-                ans += (div / 2) * 1;
-            }
-            div *= 2;
-            System.out.println("ans " + ans);
-            System.out.println();
-        }
+        long ans = calc(b) ^ calc(a - 1);
         System.out.println(ans);
+    }
+    public static long calc(long x) {
+        if (x <= 0) {
+            return 0;
+        }
+        x++;
+        long ans = 0;
+        for (int i = 0; i < 50; i++) {
+            long loop = (1L << (i + 1));
+            long cnt = (x / loop) * (loop / 2);
+            cnt += Math.max(0, (x % loop) - (loop / 2));
+            if (cnt % 2 == 1) {
+                ans += (1L << i);
+            }
+        }
+        return ans;
     }
 }
