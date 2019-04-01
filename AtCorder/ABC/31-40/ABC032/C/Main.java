@@ -5,19 +5,38 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        List<Long> a = new ArrayList<>();
+        long k = sc.nextLong();
+        long[] s = new long[n];
+        boolean isZero = false;
         for (int i = 0; i < n; i++) {
-            a.add(sc.nextLong());
+            s[i] = sc.nextLong();
+            if (s[i] == 0) {
+                isZero = true;
+            }
         }
-        List<Long> dp = new ArrayList<>();
-        dp.add(0L);
-        dp.add(Math.abs(a.get(1) - a.get(0)));
-        for (int i = 2; i < n; i++) {
-            long diff1 = Math.abs(a.get(i - 2) - a.get(i));
-            long diff2 = Math.abs(a.get(i - 1) - a.get(i));
-            long min = Math.min(dp.get(i - 2) + diff1, dp.get(i - 1) + diff2);
-            dp.add(min);
+        if (isZero) {
+            System.out.println(n);
+            return;
         }
-        System.out.println(dp.get(n-1));
+        long ans = syakutori(s, k, n);
+        System.out.println(ans);
+    }
+    public static long syakutori(long[] s, long k, int n) {
+        int right = 0;
+        long res = 0;
+        long mult = 1;
+        for (int left = 0; left < n; left++) {
+            while (right < n && mult * s[right] <= k) {
+                mult *= s[right];
+                right++;
+            }
+            res = Math.max(res, right - left);
+            if (left >= right) {
+                right++;
+                continue;
+            }
+            mult /= s[left];
+        }
+        return res;
     }
 }
