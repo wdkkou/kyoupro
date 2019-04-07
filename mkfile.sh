@@ -1,3 +1,3 @@
 #!/bin/sh
-CURRENT=$PWD
-cp ~/kyoupro/original/Main.java $CURRENT
+DIR=$@
+cp ~/kyoupro/original/Main.java $DIR
