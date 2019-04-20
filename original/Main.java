@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
@@ -13,6 +14,7 @@ class FastScanner {
     private final byte[] buffer = new byte[1024];
     private int ptr = 0;
     private int buflen = 0;
+
     private boolean hasNextByte() {
         if (ptr < buflen) {
             return true;
@@ -29,19 +31,24 @@ class FastScanner {
         }
         return true;
     }
+
     private int readByte() {
         if (hasNextByte())
             return buffer[ptr++];
         else
             return -1;
     }
+
     private static boolean isPrintableChar(int c) {
         return 33 <= c && c <= 126;
     }
+
     public boolean hasNext() {
-        while (hasNextByte() && !isPrintableChar(buffer[ptr])) ptr++;
+        while (hasNextByte() && !isPrintableChar(buffer[ptr]))
+            ptr++;
         return hasNextByte();
     }
+
     public String next() {
         if (!hasNext())
             throw new NoSuchElementException();
@@ -53,6 +60,7 @@ class FastScanner {
         }
         return sb.toString();
     }
+
     public long nextLong() {
         if (!hasNext())
             throw new NoSuchElementException();
@@ -78,12 +86,14 @@ class FastScanner {
             b = readByte();
         }
     }
+
     public int nextInt() {
         long nl = nextLong();
         if (nl < Integer.MIN_VALUE || nl > Integer.MAX_VALUE)
             throw new NumberFormatException();
         return (int) nl;
     }
+
     public double nextDouble() {
         return Double.parseDouble(next());
     }
