@@ -4,8 +4,24 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int n = sc.nextInt();
-        System.out.println();
+        int x = sc.nextInt();
+        int y = sc.nextInt();
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int sx = sc.nextInt();
+        int sy = sc.nextInt();
+        int tx = sc.nextInt();
+        int ty = sc.nextInt();
+        sy -= a;
+        ty -= a;
+        b -= a;
+        int svec = x * sy - b * sx;
+        int tvec = x * ty - b * tx;
+        if ((svec < 0 && tvec < 0) || (svec > 0 && tvec > 0)) {
+            System.out.println("No");
+            return;
+        }
+        System.out.println("Yes");
     }
 }
 
