@@ -2,10 +2,28 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    static long INF = 1000000000;
+
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
-        System.out.println();
+        long[] a = new long[n];
+        long min = INF;
+        long cntMinus = 0;
+        long ans = 0;
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextLong();
+            if (a[i] < 0) {
+                cntMinus++;
+            }
+            ans += Math.abs(a[i]);
+            min = Math.min(min, Math.abs(a[i]));
+        }
+        if (cntMinus % 2 == 0) {
+            System.out.println(ans);
+            return;
+        }
+        System.out.println(ans - Math.abs(min) * 2);
     }
 }
 
