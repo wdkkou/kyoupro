@@ -29,34 +29,17 @@ public class Main {
             }
         }
 
-        // System.out.println("ans = " + ans);
-        // System.out.println("a = " + aCnt);
-        // System.out.println(bCnt);
-        // System.out.println(abCnt);
-        // if (Math.abs(aCnt - bCnt) >= abCnt) {
-        // ans += Math.min(aCnt, bCnt) + abCnt;
-        // } else {
-        // long res1 = (abCnt + Math.abs(aCnt - bCnt) + 1) / 2 + Math.min(aCnt, bCnt);
-        // abCnt -= Math.abs(aCnt - bCnt);
-        // long res2 = Math.max(aCnt, bCnt) + (abCnt + 1) / 2;
-        // ans += Math.max(res1, res2);
-        // }
-
-        long k = (abCnt + 1) / 2;
-        if (abCnt <= 1) {
-            k = 0;
+        if (abCnt == 0) {
+            ans += Math.min(aCnt, bCnt);
+            System.out.println(ans);
+            return;
         }
-        if (abCnt >= 1) {
-            if (aCnt > 0) {
-                k++;
-                aCnt--;
-            }
-            if (bCnt > 0) {
-                k++;
-                bCnt--;
-            }
+        if (aCnt + bCnt > 0) {
+            ans += Math.min(aCnt, bCnt) + abCnt;
         }
-        ans += Math.min(aCnt, bCnt) + k;
+        if (aCnt + bCnt == 0) {
+            ans += abCnt - 1;
+        }
         System.out.println(ans);
     }
 }
