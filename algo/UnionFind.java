@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class UnionFind {
     public static void main(String[] args) {
         int n = 3;
@@ -8,9 +9,11 @@ public class UnionFind {
             System.out.println(u.root(i));
         }
     }
+
     static int[] par;
     static int[] rank;
     static int[] size;
+
     public UnionFind(int n) {
         this.par = new int[n];
         this.rank = new int[n];
