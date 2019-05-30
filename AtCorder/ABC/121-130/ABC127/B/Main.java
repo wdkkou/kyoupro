@@ -2,59 +2,16 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static boolean[] v = new boolean[1000000];
-    static boolean[] color = new boolean[1000000];
-
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int n = sc.nextInt();
-        Map<Integer, List<Edge>> w = new HashMap<>();
-        for (int i = 0; i < n - 1; i++) {
-            int u = sc.nextInt() - 1;
-            int v = sc.nextInt() - 1;
-            long weight = sc.nextLong();
-            if (!w.containsKey(u)) {
-                w.put(u, new ArrayList<>());
-            }
-            if (!w.containsKey(v)) {
-                w.put(v, new ArrayList<>());
-            }
-            w.get(u).add(new Edge(v, weight));
-            w.get(v).add(new Edge(u, weight));
+        int r = sc.nextInt();
+        int d = sc.nextInt();
+        long x = sc.nextLong();
+        long ans = x;
+        for (int i = 0; i < 10; i++) {
+            ans = r * ans - d;
+            System.out.println(ans);
         }
-        dfs(0, w);
-        for (int i = 0; i < n; i++) {
-            if (color[i]) {
-                System.out.println("1");
-            } else {
-                System.out.println("0");
-            }
-        }
-    }
-
-    public static void dfs(int now, Map<Integer, List<Edge>> w) {
-        v[now] = true;
-        for (Edge e : w.get(now)) {
-            if (v[e.to]) {
-                continue;
-            }
-            if (e.cost % 2 == 0) {
-                color[e.to] = color[now];
-            } else {
-                color[e.to] = !color[now];
-            }
-            dfs(e.to, w);
-        }
-    }
-}
-
-class Edge {
-    int to;
-    long cost;
-
-    public Edge(int to, long cost) {
-        this.to = to;
-        this.cost = cost;
     }
 }
 
