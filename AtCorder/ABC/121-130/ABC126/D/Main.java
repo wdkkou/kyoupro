@@ -19,11 +19,6 @@ public class Main {
         System.out.println();
     }
 
-    public static void dfs(int start, int end, long[][] w) {
-if(){
-
-}
-    }
 }
 
 class FastScanner {
