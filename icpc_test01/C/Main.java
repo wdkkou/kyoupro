@@ -4,13 +4,28 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int[] a = new int[3];
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
+        int n = sc.nextInt();
+        String[] s = new String[n];
+        for (int i = 0; i < n; i++) {
+            s[i] = sc.next();
         }
-        Arrays.sort(a);
-        int ans = a[0] + a[1];
-        System.out.println(ans);
+        long cnt = 0;
+        for (int i = 0; i < n; i++) {
+            if (s[i].equals("A")) {
+                cnt++;
+            } else if (s[i].equals("Un")) {
+                cnt--;
+                if (cnt < 0) {
+                    System.out.println("NO");
+                    return;
+                }
+            }
+        }
+        if (cnt != 0) {
+            System.out.println("NO");
+            return;
+        }
+        System.out.println("YES");
     }
 }
 

@@ -4,13 +4,26 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int[] a = new int[3];
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
+        while (true) {
+            int n = sc.nextInt();
+            if (n == 0) {
+                break;
+            }
+            int[] value = new int[n];
+            int max = 0;
+            int min = 1000;
+            for (int i = 0; i < n; i++) {
+                value[i] = sc.nextInt();
+            }
+            Arrays.sort(value);
+            long total = 0;
+            for (int i = 1; i < n - 1; i++) {
+                total += value[i];
+            }
+            long ans = total / (n - 2);
+            System.out.println(ans);
         }
-        Arrays.sort(a);
-        int ans = a[0] + a[1];
-        System.out.println(ans);
+
     }
 }
 

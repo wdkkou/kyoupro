@@ -4,13 +4,42 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int[] a = new int[3];
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
+        while (true) {
+            long n = sc.nextLong();
+            int l = sc.nextInt();
+            if (n == 0 && l == 0) {
+                break;
+            }
+            long[] a = new long[20];
+            a[0] = n;
+            for (int i = 1; i < 20; i++) {
+                long min = min();
+                long max = max();
+                a[i] = max - min;
+            }
         }
-        Arrays.sort(a);
-        int ans = a[0] + a[1];
-        System.out.println(ans);
+        System.out.println();
+    }
+
+    public static long min(long n, int l) {
+        Map<Character, Integer> map = new TreeMap<>();
+        String s = String.valueOf(n);
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (!map.continsKey(ch)) {
+                map.put(ch, 0);
+            }
+            map.put(ch, map.get(ch) + 1);
+        }
+        String max = "";
+        for (Character key : map.keySet()) {
+            int k = map.get(key);
+            for (int i = 0; i < k; i++) {
+                max += key;
+            }
+        }
+
+        return;
     }
 }
 

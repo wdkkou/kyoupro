@@ -2,15 +2,35 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    static long MOD = 1000000007;
+
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int[] a = new int[3];
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        boolean[] ok = new boolean[n + 1];
+        for (int i = 0; i < m; i++) {
+            int x = sc.nextInt();
+            ok[x] = true;
         }
-        Arrays.sort(a);
-        int ans = a[0] + a[1];
-        System.out.println(ans);
+        long[] s = new long[n + 1];
+        s[0] = 1;
+        s[1] = 1;
+        for (int i = 1; i <= n; i++) {
+            if (i == 1) {
+                if (ok[i]) {
+                    s[i] = 0;
+                }
+                continue;
+            }
+            if (ok[i]) {
+                s[i] = 0;
+                continue;
+            }
+            s[i] = s[i - 2] + s[i - 1];
+            s[i] %= MOD;
+        }
+        System.out.println(s[n]);
     }
 }
 

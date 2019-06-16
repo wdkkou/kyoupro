@@ -4,13 +4,46 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int[] a = new int[3];
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
+        while (true) {
+            int M = sc.nextInt();
+            long T = sc.nextLong();
+            int P = sc.nextInt();
+            int R = sc.nextInt();
+            if (M == 0 && T == 0 && P == 0 && R == 0) {
+                break;
+            }
+            Map<Integer, Pair> map = new HashMap<>();
+            for (int i = 0; i < r; i++) {
+                int m = sc.nextInt();
+                long t = sc.nextLong();
+                int p = sc.nextInt();
+                int r = sc.nextInt();
+                if (r != 0) {
+
+                }
+            }
         }
-        Arrays.sort(a);
-        int ans = a[0] + a[1];
-        System.out.println(ans);
+        System.out.println();
+    }
+}
+
+class Pair {
+    int cnt;
+    long time;
+
+    public Pair(int cnt, int time) {
+        this.cnt = cnt;
+        this.time = time;
+    }
+
+    public int compareTo(Pair p) {
+        return this.time - p.time;
+    }
+}
+
+class PairComparator implements Comparator<Pair> {
+    public int compare(Pair p1, Pair p2) {
+        return p1.end - p2.end;
     }
 }
 

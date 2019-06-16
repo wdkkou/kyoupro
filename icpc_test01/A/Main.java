@@ -4,13 +4,33 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int[] a = new int[3];
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
+        while (true) {
+            int m = sc.nextInt();
+            int n_min = sc.nextInt();
+            int n_max = sc.nextInt();
+            if (m == 0 && n_min == 0 && n_max == 0) {
+                break;
+            }
+            Integer[] p = new Integer[m];
+            for (int i = 0; i < m; i++) {
+                p[i] = sc.nextInt();
+            }
+            Arrays.sort(p, Collections.reverseOrder());
+            int ans = m;
+            int gap = 0;
+            for (int i = n_min; i <= n_max; i++) {
+                if (gap <= solve(i, p)) {
+                    ans = i;
+                    gap = solve(i, p);
+                }
+            }
+            System.out.println(ans);
         }
-        Arrays.sort(a);
-        int ans = a[0] + a[1];
-        System.out.println(ans);
+    }
+
+    public static int solve(int n, Integer[] p) {
+        int res = Math.abs(p[n - 1] - p[n]);
+        return res;
     }
 }
 

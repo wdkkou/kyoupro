@@ -4,12 +4,20 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        int[] a = new int[3];
-        for (int i = 0; i < 3; i++) {
-            a[i] = sc.nextInt();
+        int n = sc.nextInt();
+        int[] w = new int[n];
+        int s2 = 0;
+        for (int i = 0; i < n; i++) {
+            w[i] = sc.nextInt();
+            s2 += w[i];
         }
-        Arrays.sort(a);
-        int ans = a[0] + a[1];
+        int s1 = 0;
+        int ans = Integer.MAX_VALUE;
+        for (int i = 0; i < n; i++) {
+            s1 += w[i];
+            s2 -= w[i];
+            ans = Math.min(ans, Math.abs(s1 - s2));
+        }
         System.out.println(ans);
     }
 }
