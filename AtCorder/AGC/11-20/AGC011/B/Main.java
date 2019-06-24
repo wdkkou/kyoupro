@@ -5,27 +5,20 @@ public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
-        long[] x = new long[n];
+        long[] a = new long[n];
         for (int i = 0; i < n; i++) {
-            x[i] = sc.nextLong();
+            a[i] = sc.nextLong();
         }
-        long ans = 0;
-        for (int i = 0; i < n; i++) {
-            // System.out.printf("x[%d] = %d %n", i, x[i]);
-            ans += x[i] / 2;
-            if (x[i] % 2 != 0) {
-                if (i + 1 >= n) {
-                    break;
-                }
-                if (x[i + 1] <= 0) {
-                    continue;
-                }
-                ans++;
-                x[i + 1]--;
+        Arrays.sort(a);
+        int index = -1;
+        long sum = a[0];
+        for (int i = 0; i < n - 1; i++) {
+            if (sum * 2 < a[i + 1]) {
+                index = i;
             }
-            // System.out.println("i = " + i);
-            // System.out.println("ans = " + ans);
+            sum += a[i + 1];
         }
+        int ans = n - index - 1;
         System.out.println(ans);
     }
 }
