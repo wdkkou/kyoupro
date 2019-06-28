@@ -5,42 +5,40 @@ public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         while (true) {
-            long h = sc.nextLong();
-            long w = sc.nextLong();
-            if (h == 0 && w == 0) {
+            int n = sc.nextInt();
+            int l = sc.nextInt();
+            int r = sc.nextInt();
+            if (n == 0 && l == 0 && r == 0) {
                 return;
             }
-            long min = Long.MAX_VALUE;
-            long ansX = 0;
-            long ansY = 0;
-            for (long y = 1; y <= 150; y++) {
-                for (long x = y + 1; x <= 150; x++) {
-                    if (x == w && y == h) {
-                        continue;
-                    }
-                    long res = x * x + y * y;
-                    if (res == h * h + w * w && y < h) {
-                        continue;
-                    }
-                    if (res >= h * h + w * w) {
-                        if (res > min) {
-                            continue;
-                        }
-                        // if (y < h) {
-                        // continue;
-                        // }
-                        if (res == min && y >= ansY) {
-                            continue;
-                        }
-                        min = res;
-                        ansX = x;
-                        ansY = y;
-                    }
+            long[] a = new long[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextLong();
+            }
+            long ans = 0;
+            for (int i = l; i <= r; i++) {
+                if (solve((long) i, a, n)) {
+                    ans++;
                 }
             }
-            System.out.printf("%d %d%n", ansY, ansX);
-
+            System.out.println(ans);
         }
+    }
+
+    public static boolean solve(long x, long[] a, int n) {
+        for (int i = 0; i < a.length; i++) {
+            if (x % a[i] == 0) {
+                if (i % 2 == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+        if (n % 2 == 0) {
+            return true;
+        }
+        return false;
     }
 }
 

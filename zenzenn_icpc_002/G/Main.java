@@ -2,46 +2,87 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         while (true) {
-            long h = sc.nextLong();
-            long w = sc.nextLong();
-            if (h == 0 && w == 0) {
+            int N = sc.nextInt();
+            int M = sc.nextInt();
+            if (N == 0 && M == 0) {
                 return;
             }
-            long min = Long.MAX_VALUE;
-            long ansX = 0;
-            long ansY = 0;
-            for (long y = 1; y <= 150; y++) {
-                for (long x = y + 1; x <= 150; x++) {
-                    if (x == w && y == h) {
-                        continue;
-                    }
-                    long res = x * x + y * y;
-                    if (res == h * h + w * w && y < h) {
-                        continue;
-                    }
-                    if (res >= h * h + w * w) {
-                        if (res > min) {
-                            continue;
-                        }
-                        // if (y < h) {
-                        // continue;
-                        // }
-                        if (res == min && y >= ansY) {
-                            continue;
-                        }
-                        min = res;
-                        ansX = x;
-                        ansY = y;
-                    }
+            int r = sc.nextInt();
+            Map<Integer, List<Pair>> map = new HashMap<>();
+            for (int i = 1; i <= M; i++) {
+                map.put(i, new ArrayList<>());
+            }
+            long[] login = new long[N + 1];
+            for (int i = 0; i < r; i++) {
+                long t = sc.nextLong();
+                int n = sc.nextInt();
+                int m = sc.nextInt();
+                int s = sc.nextInt();
+                if (s == 1) {
+                    login[n] = t;
+                } else {
+                    map.get(m).add(new Pair(login[n], t));
                 }
             }
-            System.out.printf("%d %d%n", ansY, ansX);
-
+            for (int i = 1; i <= M; i++) {
+                map.get(i).sort((a, b) -> (int) a.s - (int) b.s);
+            }
+            int q = sc.nextInt();
+            for (int i = 0; i < q; i++) {
+                long s = sc.nextInt();
+                long e = sc.nextInt();
+                int m = sc.nextInt();
+                long ans = 0;
+                long off = 0;
+                long on = s;
+                for (Pair p : map.get(m)) {
+                    on = Math.max(on, p.s);
+                    off = Math.min(e, p.t);
+                    ans += Math.max(0, off - on);
+                    on = Math.max(on, p.t);
+                }
+                System.out.println(ans);
+            }
         }
     }
+}
+
+class Pair {
+    long s;
+    long t;
+
+    public Pair(long s, long t) {
+        this.s = s;
+        this.t = t;
+    }
+
+    public long compareTo(Pair p) {
+        return this.t - p.t;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pair p = (Pair) o;
+        return this.s == p.s && this.t == p.t;
+    }
+
+    public int hashCode() {
+        return Objects.hash(s, t);
+    }
+
+    public String toString() {
+        return String.format("s = %s,t = %s", s, t);
+    }
+
 }
 
 class FastScanner {
