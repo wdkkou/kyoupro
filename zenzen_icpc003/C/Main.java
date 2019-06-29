@@ -5,49 +5,52 @@ public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         while (true) {
-            int n = sc.nextInt();
-            int l = sc.nextInt();
-            if (n == 0 && l == 0) {
-                break;
+            int d = sc.nextInt();
+            int w = sc.nextInt();
+            if (d == 0 && w == 0) {
+                return;
             }
-            long[] ans = new long[21];
-            ans[0] = n;
-            for (int k = 1; k <= 20; k++) {
-                int[] d = new int[l];
-                for (int i = 0; i < l; i++) {
-                    d[i] = n % 10;
-                    n /= 10;
+            int[][] res = new int[d][w];
+            for (int i = 0; i < d; i++) {
+                for (int j = 0; j < w; j++) {
+                    res[i][j] = sc.nextInt();
                 }
-                Arrays.sort(d);
-                int min = 0;
-                for (int i = 0; i < l; i++) {
-                    min *= 10;
-                    min += d[i];
-                }
-                int max = 0;
-                for (int i = 0; i < l; i++) {
-                    max *= 10;
-                    max += d[l - i - 1];
-                }
-                // System.out.printf("max = %d%n", max);
-                // System.out.printf("min = %d%n", min);
-                ans[k] = max - min;
-                n = max - min;
-                boolean ok = false;
-                for (int i = 0; i < k; i++) {
-                    if (n == ans[i]) {
-                        System.out.printf("%d %d %d%n", i, ans[i], k - i);
-                        ok = true;
-                        break;
+            }
+            long ans = 0;
+            for (int i = 0; i < d; i++) {
+                for (int j = 0; j < w; j++) {
+                    for (int k = i + 2; k < d; k++) {
+                        for (int l = j + 2; l < w; l++) {
+                            int min = 10;
+                            for (int a = i; a < k + 1; a++) {
+                                min = Math.min(Math.min(min, res[a][j]), res[a][l]);
+                            }
+                            for (int a = j; a < l + 1; a++) {
+                                min = Math.min(Math.min(min, res[i][a]), res[k][a]);
+                            }
+                            int max = 0;
+                            for (int a = i + 1; a < k; a++) {
+                                for (int b = j + 1; b < l; b++) {
+                                    max = Math.max(max, res[a][b]);
+                                }
+                            }
+                            if (max >= min) {
+                                continue;
+                            }
+                            long res1 = 0;
+                            for (int a = i + 1; a < k; a++) {
+                                for (int b = j + 1; b < l; b++) {
+                                    res1 += Math.max(0, min - res[a][b]);
+                                }
+                            }
+                            ans = Math.max(ans, res1);
+                        }
                     }
                 }
-                if (ok) {
-                    break;
-                }
             }
+            System.out.println(ans);
         }
     }
-
 }
 
 class FastScanner {
