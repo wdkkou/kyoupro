@@ -5,23 +5,20 @@ public class Main {
     static long MOD = 1000000007;
 
     public static void main(String[] args) {
-        // 0 C 0 == 0
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
         int k = sc.nextInt();
         long[][] comb = calcComb(n);
-        System.out.println(comb[n - k + 1][1]);
-        for (int i = 2; i <= k; i++) {
+        for (int i = 1; i <= k; i++) {
             long ans = (comb[n - k + 1][i] % MOD) * (comb[k - 1][i - 1] % MOD) % MOD;
-            // System.out.println(comb[n - k + 1][i]);
-            // System.out.println(comb[k - 1][i - 1]);
-            // System.out.println("ans");
             System.out.println(ans);
         }
     }
 
     public static long[][] calcComb(int n) {
         long[][] c = new long[n + 1][n + 1];
+        // 0 C 0 == 1
+        c[0][0] = 1;
         for (int i = 1; i <= n; i++) {
             for (int j = 0; j <= n; j++) {
                 if (j == 0 || i == j) {
@@ -31,6 +28,7 @@ public class Main {
                 c[i][j] = c[i - 1][j - 1] % MOD + c[i - 1][j] % MOD;
             }
         }
+        // System.out.println(Arrays.deepToString(c));
         return c;
     }
 
