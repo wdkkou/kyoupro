@@ -2,29 +2,36 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-    static long MOD = 1000000000;
+    static long MOD = 1000000007;
 
     public static void main(String[] args) {
+        // 0 C 0 == 0
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
         int k = sc.nextInt();
-        int r = n - k;
-        long[] ans = new long[k];
-        ans[0] = n - k + 1;
-        for (int i = 1; i < k; i++) {
-            long cnt1 = Math.max((k - i - 1) * (i + 1), 1) % MOD;
-            long cnt2 = Math.max((r - i) * i, 1) % MOD;
-            long cnt3 = Math.max((k - i - 1) * (i + 1), 1) % MOD;
-            long cnt4 = Math.max((r - i - 1) * (i + 1), 1) % MOD;
-            long cnt5 = Math.max((k - i - 1) * (i + 1), 1) % MOD;
-            long cnt6 = Math.max((r - i - 2) * i, 0) % MOD;
-            ans[i] += cnt1 * cnt2 % MOD;
-            ans[i] += cnt3 * cnt4 % MOD * 2 % MOD;
-            ans[i] += cnt5 * cnt6 % MOD;
+        long[][] comb = calcComb(n);
+        System.out.println(comb[n - k + 1][1]);
+        for (int i = 2; i <= k; i++) {
+            long ans = (comb[n - k + 1][i] % MOD) * (comb[k - 1][i - 1] % MOD) % MOD;
+            // System.out.println(comb[n - k + 1][i]);
+            // System.out.println(comb[k - 1][i - 1]);
+            // System.out.println("ans");
+            System.out.println(ans);
         }
-        for (int i = 0; i < ans.length; i++) {
-            System.out.println(ans[i]);
+    }
+
+    public static long[][] calcComb(int n) {
+        long[][] c = new long[n + 1][n + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (j == 0 || i == j) {
+                    c[i][j] = 1L;
+                    continue;
+                }
+                c[i][j] = c[i - 1][j - 1] % MOD + c[i - 1][j] % MOD;
+            }
         }
+        return c;
     }
 
 }
