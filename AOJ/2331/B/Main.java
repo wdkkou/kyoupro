@@ -4,61 +4,25 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
-        List<Long> seven = new ArrayList<>();
-        for (long i = 6; i <= 300000; i += 7) {
-            seven.add(i);
-            if (i + 2 > 300000) {
-                break;
-            }
-            seven.add(i + 2);
+        int n = sc.nextInt();
+        int[] f = new int[100003];
+        for (int i = 0; i < n; i++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            f[a]++;
+            f[b + 1]--;
         }
-        boolean[] sevenPrime = new boolean[300001];
-        for (long num : seven) {
-            if (!isPrime(num)) {
-                continue;
+        int sum = 1;
+        int ans = 0;
+        for (int i = 0; i <= 100002; i++) {
+            sum += f[i];
+            if (i <= sum) {
+                ans = i;
             }
-            sevenPrime[(int) num] = true;
         }
-        while (true) {
-            long n = sc.nextLong();
-            if (n == 1) {
-                return;
-            }
-            List<Integer> ans = new ArrayList<>();
-            for (int i = 2; i <= n; i++) {
-                if (!sevenPrime[i]) {
-                    continue;
-                }
-                if (n % i == 0) {
-                    ans.add(i);
-                }
-            }
-            System.out.print(n + ":");
-            for (long a : ans) {
-                System.out.printf(" %d", a);
-            }
-            System.out.println();
-        }
+        System.out.println(ans - 1);
     }
 
-    public static boolean isSeven(long x) {
-        if (x % 7 == 1 || x % 7 == 6) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isPrime(long x) {
-        if (x == 1) {
-            return false;
-        }
-        for (long i = 2; i * i <= x; i++) {
-            if (x % i == 0 && isSeven(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
 }
 
 class FastScanner {
