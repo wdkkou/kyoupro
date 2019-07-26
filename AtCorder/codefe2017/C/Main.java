@@ -5,39 +5,58 @@ public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
-        long[] a = new long[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.nextLong();
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i <= 12; i++) {
+            map.put(i, 0);
         }
-        Arrays.sort(a);
-        int index = n - 1;
-        for (int i = 1; i < n - 1; i++) {
-            if (a[i] > 0) {
-                index = i;
-                break;
+        map.put(0, 1);
+        for (int i = 0; i < n; i++) {
+            int d = sc.nextInt();
+            map.put(d, map.get(d) + 1);
+        }
+        for (int i = 1; i <= 11; i++) {
+            if (map.get(i) >= 3) {
+                System.out.println(0);
+                return;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        long x = a[0];
-        long res = a[0];
-        for (int i = index; i < n - 1; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            res = x;
+        if (map.get(0) >= 2 || map.get(12) >= 2) {
+            System.out.println(0);
+            return;
         }
-        long ans = a[n - 1];
-        x = a[n - 1];
-        for (int i = 1; i < index; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            ans = x;
+        int ans = 0;
+        for (int i = 0; i < (1 << 11); i++) {
+            List<Integer> num = new ArrayList<>();
+            num.add(0);
+            if (map.get(12) == 1) {
+                num.add(12);
+            }
+            for (int j = 0; j < 11; j++) {
+                if (map.get(j + 1) == 0) {
+                    continue;
+                }
+                if (map.get(j + 1) == 2) {
+                    num.add(24 - j - 1);
+                    num.add(j + 1);
+                    continue;
+                }
+                if ((i >> j & 1) == 1) {
+                    num.add(24 - j - 1);
+                } else {
+                    num.add(j + 1);
+                }
+            }
+            int min = Integer.MAX_VALUE;
+            for (int k = 0; k < num.size(); k++) {
+                for (int l = k + 1; l < num.size(); l++) {
+                    int s = Math.abs(num.get(k) - num.get(l));
+                    int sub = Math.min(s, 24 - s);
+                    min = Math.min(min, sub);
+                }
+            }
+            ans = Math.max(ans, min);
         }
-        sb.append(String.format("%d %d", ans, res));
-        ans -= res;
         System.out.println(ans);
-        System.out.println(sb.toString());
     }
 }
 

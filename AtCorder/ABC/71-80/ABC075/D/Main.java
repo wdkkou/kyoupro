@@ -5,40 +5,85 @@ public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
-        long[] a = new long[n];
+        int k = sc.nextInt();
+        long[] x = new long[n];
+        long[] y = new long[n];
+        List<Long> xlist = new ArrayList<>();
+        List<Long> ylist = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextLong();
+            x[i] = sc.nextLong();
+            y[i] = sc.nextLong();
+            xlist.add(x[i]);
+            ylist.add(y[i]);
         }
-        Arrays.sort(a);
-        int index = n - 1;
-        for (int i = 1; i < n - 1; i++) {
-            if (a[i] > 0) {
-                index = i;
-                break;
+        Collections.sort(xlist);
+        Collections.sort(ylist);
+        long ans = (xlist.get(n - 1) - xlist.get(0)) * (ylist.get(n - 1) - ylist.get(0));
+        for (int x_min = 0; x_min < n; x_min++) {
+            for (int x_max = x_min + 1; x_max < n; x_max++) {
+                for (int y_min = 0; y_min < n; y_min++) {
+                    for (int y_max = y_min + 1; y_max < n; y_max++) {
+                        int cnt = 0;
+                        long lx = xlist.get(x_min);
+                        long rx = xlist.get(x_max);
+                        long by = ylist.get(y_min);
+                        long uy = ylist.get(y_max);
+                        // System.out.println("lx = " + lx);
+                        // System.out.println("rx = " + rx);
+                        // System.out.println("by = " + by);
+                        // System.out.println("uy = " + uy);
+                        for (int i = 0; i < n; i++) {
+                            // System.out.printf("x[%d] = %d%n", i, x[i]);
+                            // System.out.printf("y[%d] = %d%n", i, y[i]);
+                            if (lx <= x[i] && x[i] <= rx && by <= y[i] && y[i] <= uy) {
+                                cnt++;
+                            }
+                        }
+                        // System.out.println("cnt = " + cnt);
+                        if (cnt >= k) {
+                            long res = Math.abs(rx - lx) * Math.abs(uy - by);
+                            ans = Math.min(ans, res);
+                        }
+                    }
+                }
             }
         }
-        StringBuilder sb = new StringBuilder();
-        long x = a[0];
-        long res = a[0];
-        for (int i = index; i < n - 1; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            res = x;
-        }
-        long ans = a[n - 1];
-        x = a[n - 1];
-        for (int i = 1; i < index; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            ans = x;
-        }
-        sb.append(String.format("%d %d", ans, res));
-        ans -= res;
         System.out.println(ans);
-        System.out.println(sb.toString());
     }
+}
+
+class Pair {
+    long x;
+    long y;
+
+    public Pair(long x, long y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public long compareTo(Pair p) {
+        return this.y - p.y;
+    }
+
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Pair p = (Pair) o;
+        return this.x == p.x && this.y == p.y;
+    }
+
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    public String toString() {
+        return String.format("x = %s,y = %s", x, y);
+    }
+
 }
 
 class FastScanner {

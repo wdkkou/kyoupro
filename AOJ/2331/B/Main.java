@@ -5,40 +5,24 @@ public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
-        long[] a = new long[n];
+        int[] f = new int[100003];
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextLong();
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            f[a]++;
+            f[b + 1]--;
         }
-        Arrays.sort(a);
-        int index = n - 1;
-        for (int i = 1; i < n - 1; i++) {
-            if (a[i] > 0) {
-                index = i;
-                break;
+        int sum = 1;
+        int ans = 0;
+        for (int i = 0; i <= 100002; i++) {
+            sum += f[i];
+            if (i <= sum) {
+                ans = i;
             }
         }
-        StringBuilder sb = new StringBuilder();
-        long x = a[0];
-        long res = a[0];
-        for (int i = index; i < n - 1; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            res = x;
-        }
-        long ans = a[n - 1];
-        x = a[n - 1];
-        for (int i = 1; i < index; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            ans = x;
-        }
-        sb.append(String.format("%d %d", ans, res));
-        ans -= res;
-        System.out.println(ans);
-        System.out.println(sb.toString());
+        System.out.println(ans - 1);
     }
+
 }
 
 class FastScanner {

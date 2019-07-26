@@ -38,12 +38,6 @@ public class Main {
                 System.out.printf(" %d", a);
             }
             System.out.println();
-            // System.out.println("Seven");
-            // System.out.println(seven);
-            // System.out.println("sevenPrime");
-            // System.out.println(sevenPrime);
-            // System.out.println("ans");
-            // System.out.println(ans);
         }
     }
 

@@ -6,38 +6,21 @@ public class Main {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
         long[] a = new long[n];
+        long[] sort = new long[n];
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextLong();
+            long num = sc.nextLong();
+            a[i] = num;
+            sort[i] = num;
         }
-        Arrays.sort(a);
-        int index = n - 1;
-        for (int i = 1; i < n - 1; i++) {
-            if (a[i] > 0) {
-                index = i;
-                break;
+        Arrays.sort(sort);
+        long max = sort[n - 1];
+        for (int i = 0; i < n; i++) {
+            if (max == a[i]) {
+                System.out.println(sort[n - 2]);
+                continue;
             }
+            System.out.println(max);
         }
-        StringBuilder sb = new StringBuilder();
-        long x = a[0];
-        long res = a[0];
-        for (int i = index; i < n - 1; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            res = x;
-        }
-        long ans = a[n - 1];
-        x = a[n - 1];
-        for (int i = 1; i < index; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            ans = x;
-        }
-        sb.append(String.format("%d %d", ans, res));
-        ans -= res;
-        System.out.println(ans);
-        System.out.println(sb.toString());
     }
 }
 

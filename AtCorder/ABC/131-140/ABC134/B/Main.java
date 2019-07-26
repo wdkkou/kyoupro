@@ -5,39 +5,10 @@ public class Main {
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
-        long[] a = new long[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.nextLong();
-        }
-        Arrays.sort(a);
-        int index = n - 1;
-        for (int i = 1; i < n - 1; i++) {
-            if (a[i] > 0) {
-                index = i;
-                break;
-            }
-        }
-        StringBuilder sb = new StringBuilder();
-        long x = a[0];
-        long res = a[0];
-        for (int i = index; i < n - 1; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            res = x;
-        }
-        long ans = a[n - 1];
-        x = a[n - 1];
-        for (int i = 1; i < index; i++) {
-            long y = a[i];
-            sb.append(String.format("%d %d%n", x, y));
-            x -= y;
-            ans = x;
-        }
-        sb.append(String.format("%d %d", ans, res));
-        ans -= res;
+        int d = sc.nextInt();
+        int dist = 2 * d + 1;
+        int ans = (n + dist - 1) / dist;
         System.out.println(ans);
-        System.out.println(sb.toString());
     }
 }
 
