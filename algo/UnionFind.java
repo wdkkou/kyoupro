@@ -8,8 +8,12 @@ public class UnionFind {
         for (int i = 0; i < n; i++) {
             System.out.println(u.root(i));
         }
+        System.out.println(u);
     }
-
+    /** par それぞれの要素がどの要素に属するかを表す
+     *  rank 高さを表す
+     *  size 属する要素の個数を表す
+     * */
     static int[] par;
     static int[] rank;
     static int[] size;
@@ -25,7 +29,6 @@ public class UnionFind {
         }
     }
 
-    // find == root
     public int root(int x) {
         if (par[x] == x) {
             return x;
@@ -40,6 +43,10 @@ public class UnionFind {
     public void unite(int x, int y) {
         x = root(x);
         y = root(y);
+        // System.out.println("x = " + x);
+        // System.out.println("y = " + y);
+        // System.out.println("rank[x] = " + rank[x]);
+        // System.out.println("rank[y] = " + rank[y]);
         if (x == y) {
             return;
         }
