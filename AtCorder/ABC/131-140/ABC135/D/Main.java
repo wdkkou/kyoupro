@@ -15,9 +15,12 @@ public class Main {
             char ch = s.charAt(i);
             if (ch == '?') {
                 for (int k = 0; k < 10; k++) {
+                    System.out.println("k = " + k);
                     for (int j = 0; j < 13; j++) {
                         dp[i + 1][(j * 10 + k) % 13] += dp[i][j];
                         dp[i + 1][(j * 10 + k) % 13] %= MOD;
+                        // System.out.printf("dp[%d][%d] = %d%n", i + 1, (j * 10 + k) % 13, dp[i + 1][(j
+                        // * 10 + k) % 13]);
                     }
                 }
             } else {
@@ -25,6 +28,8 @@ public class Main {
                 for (int j = 0; j < 13; j++) {
                     dp[i + 1][(j * 10 + k) % 13] += dp[i][j];
                     dp[i + 1][(j * 10 + k) % 13] %= MOD;
+                    // System.out.printf("dp[%d][%d] = %d%n", i + 1, (j * 10 + k) % 13, dp[i + 1][(j
+                    // * 10 + k) % 13]);
                 }
             }
         }
