@@ -6,38 +6,30 @@ public class Main {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int[] a = new int[n];
-        long[] b = new long[n];
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            map.put(i, new ArrayList<>());
+        }
         for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
-            b[i] = sc.nextLong();
-        }
-        long[] dp = new long[m + 1];
-        long[] pre = new long[m + 1];
-        boolean[] job = new boolean[m + 1];
-        for (int i = 1; i <= n; i++) {
-            for (int j = 0; j <= m; j++) {
-                if (j - a[i - 1] < 0) {
-                    dp[j] = pre[j];
-                } else {
-                    System.out.println("j = " + j);
-                    System.out.println("a = " + a[i - 1]);
-                    System.out.println("j - a = " + (j - a[i - 1]));
-                    System.out.println(job[j - a[i - 1]]);
-                    if (!job[j - a[i - 1]]) {
-                        dp[j] = Math.max(pre[j - a[i - 1]] + b[i - 1], pre[j] + b[i - 1]);
-                    } else {
-                        dp[j] = Math.max(pre[j], b[i - 1]);
-                    }
-                    job[j - a[i - 1]] = true;
-                }
-                System.out.println(Arrays.toString(job));
-                System.out.println(Arrays.toString(pre));
-                System.out.println(Arrays.toString(dp));
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            if (m - a >= 0) {
+                // l[m - a].add(b);
+                map.get(m - a).add(b);
             }
-            pre = dp.clone();
         }
-        System.out.println(dp[m]);
+        // System.out.println(map);
+        int ans = 0;
+        Queue<Integer> q = new PriorityQueue<>(Comparator.reverseOrder());
+        for (int i = m - 1; i >= 0; i--) {
+            for (int b : map.get(i)) {
+                q.offer(b);
+            }
+            if (!q.isEmpty()) {
+                ans += q.poll();
+            }
+        }
+        System.out.println(ans);
     }
 }
 
