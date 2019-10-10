@@ -2,28 +2,41 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    static long INF = 1000000007;
+
     public static void main(String[] args) {
         FastScanner sc = new FastScanner();
         int n = sc.nextInt();
         int m = sc.nextInt();
         int[] a = new int[m];
         int[] b = new int[m];
-        int[][] c = new int[m][m];
+        int[] c = new int[m];
         for (int i = 0; i < m; i++) {
             a[i] = sc.nextInt();
             b[i] = sc.nextInt();
             for (int j = 0; j < b[i]; j++) {
-                c[i][j] = sc.nextInt();
+                int t = sc.nextInt() - 1;
+                c[i] += (1 << t);
             }
         }
-        long[][] dp = new long[n + 1][m + 1];
-        for (int i = 0; i < n; i++) {
-            for (int i = 0; i < n; i++) {
+        long[][] dp = new long[m + 1][(1 << n)];
 
+        for (int i = 0; i <= m; i++) {
+            Arrays.fill(dp[i], INF);
+        }
+        dp[0][0] = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < (1 << n); j++) {
+                dp[i + 1][j] = Math.min(dp[i][j], dp[i + 1][j]);
+                dp[i + 1][j | c[i]] = Math.min(dp[i + 1][j | c[i]], dp[i][j] + a[i]);
             }
         }
-
-        System.out.println();
+        // System.out.println(Arrays.deepToString(dp));
+        if (dp[m][(1 << n) - 1] == INF) {
+            System.out.println(-1);
+            return;
+        }
+        System.out.println(dp[m][(1 << n) - 1]);
     }
 }
 
