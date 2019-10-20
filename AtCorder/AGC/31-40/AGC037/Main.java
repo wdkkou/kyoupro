@@ -6,7 +6,6 @@ public class Main {
         FastScanner sc = new FastScanner();
         String s = sc.next();
         int n = s.length();
-        int ans = n;
         int[] num = new int[n + 1];
 
         if (s.charAt(0) != s.charAt(1)) {
